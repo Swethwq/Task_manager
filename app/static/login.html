@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+<head>
+  <link rel="stylesheet" href="/static/assets/styles.css">
+  <meta charset="utf-8"/><title>Login</title></head>
+<body>
+  <div class="form-container">
+  <h2>Login</h2>
+  <form id="login">
+    <input id="username" placeholder="Username" required/><br/>
+    <input id="password" type="password" placeholder="Password" required/><br/>
+    <button class="btn btn-primary">Login</button>
+  </form>
+  <p>New? <a href="/static/register.html">Register</a></p>
+  </div>
+  <script>
+  document.getElementById('login').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const payload = {
+      username: document.getElementById('username').value.trim(),
+      password: document.getElementById('password').value
+    };
+    const res = await fetch('/api/login', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify(payload)
+    });
+    if(res.ok){
+      const data = await res.json();
+      localStorage.setItem('token', data.access_token);
+      window.location.href = '/static/tasks.html';
+    } else {
+      const err = await res.json();
+      alert('Login failed: ' + (err.detail || ''));
+    }
+  });
+  </script>
+</body>
+</html>

@@ -1,0 +1,289 @@
+/* ========== Button Base Style ========== */
+.btn {
+  display: inline-block;
+  padding: 12px 25px;
+  font-size: 1rem;
+  font-weight: bold;
+  text-decoration: none;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Hover lift effect */
+.btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.25);
+}
+
+/* Click (active) effect */
+.btn:active {
+  transform: translateY(0);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* ========== Button Types ========== */
+
+/* Primary (blue) */
+.btn-primary {
+  background: linear-gradient(135deg, #007bff, #0056b3);
+  color: white;
+}
+.btn-primary:hover {
+  background: linear-gradient(135deg, #0069d9, #004ba0);
+}
+
+/* Success (green) */
+.btn-success {
+  background: linear-gradient(135deg, #28a745, #218838);
+  color: white;
+}
+.btn-success:hover {
+  background: linear-gradient(135deg, #34ce57, #1e7e34);
+}
+
+/* Danger (red) */
+.btn-danger {
+  background: linear-gradient(135deg, #dc3545, #b02a37);
+  color: white;
+}
+.btn-danger:hover {
+  background: linear-gradient(135deg, #e55365, #9c1e2a);
+}
+
+/* Warning (yellow/orange) */
+.btn-warning {
+  background: linear-gradient(135deg, #ffc107, #e0a800);
+  color: black;
+}
+.btn-warning:hover {
+  background: linear-gradient(135deg, #ffcd39, #d39e00);
+}
+
+/* Outline (transparent with border) */
+.btn-outline {
+  background-color: transparent;
+  border: 2px solid #007bff;
+  color: #007bff;
+  box-shadow: none;
+}
+.btn-outline:hover {
+  background-color: #007bff;
+  color: white;
+  box-shadow: 0 6px 12px rgba(0, 123, 255, 0.4);
+}
+
+/* ========== Sizes ========== */
+.btn-small {
+  padding: 6px 12px;
+  font-size: 0.85rem;
+}
+
+.btn-large {
+  padding: 14px 35px;
+  font-size: 1.1rem;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: linear-gradient(135deg, #007bff, #00c6ff);
+}
+
+
+/* Full-top banner heading with shadow */
+.heading-banner {
+  width: 100%;
+  background: linear-gradient(135deg, #007bff, #00c6ff);
+  color: white;
+  padding: 80px 0 40px 0; /* top padding bigger, bottom for subheading */
+  text-align: center;
+  font-size: 3rem;
+  font-weight: bold;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.25); /* banner shadow */
+}
+
+/* Subheading inside the same banner with shadow */
+.heading-banner-sub {
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: #e0f7ff; /* light color for contrast */
+  background: linear-gradient(135deg, #171817, #0f1310);
+  margin-top: 15px;
+  line-height: 1.5;
+  text-align: center;
+  letter-spacing: 0.5px;
+  text-shadow: 1px 1px 4px rgba(0,0,0,0.3); /* subtle subheading shadow */
+}
+
+/* Body & page layout */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f0f4f8;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/* Form container */
+.form-container {
+  background-color: white;
+  padding: 40px 50px;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+}
+
+/* Form heading */
+.form-container h2 {
+  margin-bottom: 25px;
+  color: #007bff;
+}
+
+/* Inputs */
+.form-container input {
+  width: 100%;
+  padding: 12px 15px;
+  margin: 10px 0;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+/* Inputs focus */
+.form-container input:focus {
+  border-color: #007bff;
+  outline: none;
+  box-shadow: 0 0 5px rgba(0,123,255,0.3);
+}
+
+/* Buttons */
+.btn {
+  display: inline-block;
+  padding: 12px 25px;
+  font-size: 1rem;
+  font-weight: bold;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: all 0.3s;
+  cursor: pointer;
+  border: none;
+  margin-top: 15px;
+}
+
+/* Success button */
+.btn-success {
+  background-color: #28a745;
+  color: white;
+}
+.btn-success:hover {
+  background-color: #218838;
+}
+
+/* Link below form */
+.form-container p {
+  margin-top: 20px;
+  font-size: 0.95rem;
+}
+.form-container a {
+  color: #007bff;
+  text-decoration: none;
+}
+.form-container a:hover {
+  text-decoration: underline;
+}
+
+/* Full-screen layout */
+.fullscreen-body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f0f4f8;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* Header top-right */
+.tasks-header {
+  background-color: #007bff; /* blue background */
+  color: white;
+  padding: 15px 25px;
+  border-radius: 12px;
+  align-self: flex-end; /* top right */
+  font-size: 1.5rem;
+  font-weight: bold;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  margin-bottom: 20px;
+}
+
+/* Task input section */
+.task-inputs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.task-inputs input {
+  flex: 1;
+  padding: 12px 15px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
+
+.task-inputs input:focus {
+  border-color: #007bff;
+  outline: none;
+  box-shadow: 0 0 5px rgba(0,123,255,0.3);
+}
+
+/* Task list */
+.task-list {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Individual task card */
+.task {
+  padding: 15px 20px;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.task strong.completed {
+  text-decoration: line-through;
+  color: gray;
+}
+
+/* Small buttons */
+.btn-small {
+  padding: 6px 12px;
+  font-size: 0.85rem;
+  border-radius: 6px;
+  margin-left: 5px;
+}
+
+/* Logout button */
+#logout {
+  align-self: flex-end;
+  margin-bottom: 15px;
+}
+

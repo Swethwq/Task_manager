@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+<head>
+  <link rel="stylesheet" href="/static/assets/styles.css">
+  <meta charset="utf-8"/><title>Register</title></head>
+<body>
+  <div class="form-container">
+  <h2>Register</h2>
+  <form id="register">
+    <input id="username" placeholder="Username" required/><br/>
+    <input id="email" type="email" placeholder="Email" required/><br/>
+    <input id="password" type="password" placeholder="Password" required/><br/>
+    <button class="btn btn-success">Register</button>
+  </form>
+  <p>Already have an account? <a href="/static/login.html">Login</a></p>
+  </div>
+  <script>
+  document.getElementById('register').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const payload = {
+      username: document.getElementById('username').value.trim(),
+      email: document.getElementById('email').value.trim(),
+      password: document.getElementById('password').value
+    };
+    const res = await fetch('/api/register', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify(payload)
+    });
+    if(res.ok){
+      alert('Registered! Please login.');
+      window.location.href = '/static/login.html';
+    } else {
+      const err = await res.json();
+      alert('Error: ' + (err.detail || 'register failed'));
+    }
+  });
+  </script>
+</body>
+</html>

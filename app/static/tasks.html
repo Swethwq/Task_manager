@@ -1,0 +1,99 @@
+<!doctype html>
+<html>
+<head>
+  <link rel="stylesheet" href="/static/assets/styles.css">
+  <meta charset="utf-8">
+  <title>Your Tasks</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <style>
+    body{font-family: Arial, sans-serif; padding: 1rem;}
+    .task {padding:0.5rem;border:1px solid #ddd;margin-bottom:0.5rem;border-radius:6px; display:flex;justify-content:space-between;align-items:center;}
+    .completed {text-decoration:line-through;color:gray;}
+  </style>
+</head>
+<body class="fullscreen-body">
+  <div class="tasks-container">
+  <h2 class="tasks-header">Your Tasks</h2>
+  <button id="logout" class="btn btn-danger">Logout</button>
+  <div div class="task-inputs">
+    <input id="title" placeholder="Title" />
+    <input id="desc" placeholder="Description" />
+    <button id="add">Add Task</button>
+  </div>
+  <div id="list" class="task-list"></div>
+  </div>
+<script>
+const token = localStorage.getItem('token');
+if(!token){
+  window.location.href = '/static/login.html';
+}
+
+const headers = { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token };
+
+async function loadTasks(){
+  const res = await fetch('/api/tasks', { headers });
+  if(res.status === 401){
+    alert('Session expired. Login again.');
+    localStorage.removeItem('token');
+    window.location.href = '/static/login.html';
+    return;
+  }
+  const tasks = await res.json();
+  const container = document.getElementById('list');
+  container.innerHTML = '';
+tasks.forEach(t => {
+  const div = document.createElement('div');
+  div.className = 'task';
+
+  const left = document.createElement('div');
+  left.innerHTML = `<strong class="${t.completed ? 'completed' : ''}">${escape(t.title)}</strong>
+                    <div>${escape(t.description || '')}</div>`;
+
+  const right = document.createElement('div');
+  right.innerHTML = `
+    <button class="btn btn-success btn-small" onclick="toggle(${t.id})">
+      ${t.completed ? 'Undo' : 'Done'}
+    </button>
+    <button class="btn btn-danger btn-small" onclick="remove(${t.id})">
+      Delete
+    </button>
+  `;
+
+  div.appendChild(left);
+  div.appendChild(right);
+  container.appendChild(div);
+});
+
+}
+
+function escape(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+document.getElementById('add').addEventListener('click', async ()=>{
+  const title = document.getElementById('title').value.trim();
+  const description = document.getElementById('desc').value.trim();
+  if(!title) return alert('Title required');
+  const res = await fetch('/api/tasks', { method:'POST', headers, body: JSON.stringify({title, description}) });
+  if(res.ok){ document.getElementById('title').value=''; document.getElementById('desc').value=''; loadTasks(); }
+  else { alert('Failed to create'); }
+});
+
+async function toggle(id){
+  const res = await fetch(`/api/tasks/${id}/toggle`, { method:'PATCH', headers });
+  if(res.ok) loadTasks(); else alert('Error toggling');
+}
+
+async function remove(id){
+  if(!confirm('Delete task?')) return;
+  const res = await fetch(`/api/tasks/${id}`, { method:'DELETE', headers });
+  if(res.ok) loadTasks(); else alert('Error deleting');
+}
+
+document.getElementById('logout').addEventListener('click', ()=>{
+  localStorage.removeItem('token');
+  window.location.href = '/static/login.html';
+});
+
+loadTasks();
+</script>
+</body>
+</html>
